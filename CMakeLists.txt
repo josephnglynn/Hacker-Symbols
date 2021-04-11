@@ -3,7 +3,7 @@ project(LearnModernOpenGL)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(LearnModernOpenGL main.c)
+add_executable(LearnModernOpenGL main.backup)
 
 find_package(GLEW REQUIRED)
 include_directories(${GLEW_INCLUDE_DIRS})
