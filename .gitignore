@@ -1,6 +1,5 @@
 # Prerequisites
 *.d
-.idea
 # Object files
 *.o
 *.ko
@@ -50,3 +49,8 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+
+# IDEA
+.idea
+cmake-build-debug
