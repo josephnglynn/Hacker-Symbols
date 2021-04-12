@@ -5,7 +5,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
-#include <text_Renderer.h>
+#include <renderer.h>
 
 float WINDOW_WIDTH = 1920;
 float WINDOW_HEIGHT = 1080;
@@ -24,9 +24,10 @@ int main() {
     }
 
     glfwMakeContextCurrent(window);
-    glfwSetWindowSizeCallback(window, [](GLFWwindow* callbackWindow, int width, int height){
-        WINDOW_HEIGHT = (float)height;
-        WINDOW_WIDTH = (float)width;
+    glfwSetWindowSizeCallback(window, [](GLFWwindow *callbackWindow, int width, int height) {
+        WINDOW_HEIGHT = (float) height;
+        WINDOW_WIDTH = (float) width;
+        Renderer::reSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     });
 
     if (glewInit() != GLEW_OK) {
@@ -36,13 +37,13 @@ int main() {
 
     std::cout << glGetString(GL_VERSION) << std::endl;
 
-    TextRenderer::setUpTextRenderer(WINDOW_WIDTH, WINDOW_HEIGHT);
+    Renderer::setUp(WINDOW_WIDTH, WINDOW_HEIGHT, false);
 
     while (!glfwWindowShouldClose(window)) {
 
         glClear(GL_COLOR_BUFFER_BIT);
 
-        TextRenderer::RenderRow((*TextRenderer::textShader), "This is a test", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 1.0f, glm::vec3(1, 1, 1));
+        Renderer::draw(WINDOW_WIDTH, WINDOW_HEIGHT);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

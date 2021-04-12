@@ -14,6 +14,7 @@
 #include "shaders/shaderUtils.h"
 #include <GL/glew.h>
 
+
 #define FONT_PATH "Roboto-Regular.ttf"
 
 
@@ -27,14 +28,16 @@ struct Character {
 class TextRenderer {
 public:
     static unsigned int VAO, VBO;
+    static unsigned int characterWidth;
     static std::map<char, Character> Characters;
-    static Shader* textShader;
+    static Shader *textShader;
+
+    //void setUpTextRenderer(float WINDOW_WIDTH, float WINDOW_HEIGHT);
     static void setUpTextRenderer(float, float);
+
+    //void RenderRow(Shader theShader, std::string theStringOfCharacters, float theXPosition, float theYPosition, float scale, glm::vec3 theColor);
     static void RenderRow(Shader, std::string, float, float, float, glm::vec3);
 };
-
-
-
 
 
 #endif //HACKER_SYMBOLS_TEXT_RENDERER_H

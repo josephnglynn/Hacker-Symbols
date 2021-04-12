@@ -7,6 +7,9 @@
 unsigned int TextRenderer::VAO, TextRenderer::VBO;
 std::map<char, Character> TextRenderer::Characters;
 Shader* TextRenderer::textShader;
+unsigned int TextRenderer::characterWidth = 48;
+
+
 
 
 void TextRenderer::RenderRow(Shader shader, std::string row, float x, float y, float scale, glm::vec3 color) {
@@ -68,12 +71,7 @@ void TextRenderer::setUpTextRenderer(float WINDOW_WIDTH, float WINDOW_HEIGHT) {
         std::exit(-1);
     }
 
-    FT_Set_Pixel_Sizes(font, 0, 48);
-
-    if (FT_Load_Char(font, 'X', FT_LOAD_RENDER)) {
-        std::cerr << "ERROR CAN'T LOAD CHAR" << std::endl;
-        std::exit(-1);
-    }
+    FT_Set_Pixel_Sizes(font, TextRenderer::characterWidth, 0);
 
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
@@ -133,3 +131,7 @@ void TextRenderer::setUpTextRenderer(float WINDOW_WIDTH, float WINDOW_HEIGHT) {
     glUniformMatrix4fv(glGetUniformLocation((*textShader).ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 
 }
+
+
+
+
