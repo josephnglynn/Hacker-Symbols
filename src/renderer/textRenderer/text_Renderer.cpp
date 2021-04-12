@@ -7,7 +7,7 @@
 unsigned int TextRenderer::VAO, TextRenderer::VBO;
 std::map<char, Character> TextRenderer::Characters;
 Shader* TextRenderer::textShader;
-unsigned int TextRenderer::characterWidth = 48;
+unsigned int TextRenderer::characterHeight = 48;
 
 
 
@@ -21,6 +21,7 @@ void TextRenderer::RenderRow(Shader shader, std::string row, float x, float y, f
 
     std::string::const_iterator c;
     for (c = row.begin(); c != row.end(); c++) {
+
         Character character = Characters[*c];
 
         float xPos = x + (float) character.Bearing.x * scale;
@@ -71,7 +72,7 @@ void TextRenderer::setUpTextRenderer(float WINDOW_WIDTH, float WINDOW_HEIGHT) {
         std::exit(-1);
     }
 
-    FT_Set_Pixel_Sizes(font, TextRenderer::characterWidth, 0);
+    FT_Set_Pixel_Sizes(font, 0,  TextRenderer::characterHeight);
 
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 

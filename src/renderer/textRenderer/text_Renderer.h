@@ -28,7 +28,7 @@ struct Character {
 class TextRenderer {
 public:
     static unsigned int VAO, VBO;
-    static unsigned int characterWidth;
+    static unsigned int characterHeight;
     static std::map<char, Character> Characters;
     static Shader *textShader;
 
