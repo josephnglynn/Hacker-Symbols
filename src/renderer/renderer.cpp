@@ -4,11 +4,12 @@
 
 #include "renderer.h"
 #include <text_Renderer.h>
-#include <utility>
+
 
 bool Renderer::binary;
 std::vector<Row> Renderer::bufferOutput;
 float Renderer::changeInYAxis;
+glm::vec3 Renderer::color;
 
 void Renderer::draw(float WINDOW_WIDTH, float WINDOW_HEIGHT, double deltaT) {
     for (unsigned int i = 0; i < bufferOutput.size(); i++) {
@@ -17,16 +18,18 @@ void Renderer::draw(float WINDOW_WIDTH, float WINDOW_HEIGHT, double deltaT) {
             bufferOutput[i].y = 0 - (float)TextRenderer::characterHeight;
             bufferOutput[i].data = generateNewSymbols(WINDOW_WIDTH);
         }
-        TextRenderer::RenderRow((*TextRenderer::textShader), bufferOutput[i].data, 0, bufferOutput[i].y, 1, glm::vec3(1, 1, 1));
+        TextRenderer::RenderRow((*TextRenderer::textShader), bufferOutput[i].data, 0, bufferOutput[i].y, 1, color);
     }
 }
 
 
 
-void Renderer::setUp(float WINDOW_WIDTH, float WINDOW_HEIGHT, bool BINARY, float ChangeInYAxis) {
+void Renderer::setUp(float WINDOW_WIDTH, float WINDOW_HEIGHT, bool BINARY, float ChangeInYAxis, glm::vec3 COLOR) {
     TextRenderer::setUpTextRenderer(WINDOW_WIDTH, WINDOW_HEIGHT);
     binary = BINARY;
     changeInYAxis = ChangeInYAxis;
+    color = COLOR;
+    srand(time(NULL));
 }
 
 std::string Renderer::generateNewSymbols(unsigned int widthNeededToFill) {
@@ -51,13 +54,11 @@ std::string Renderer::generateNewSymbols(unsigned int widthNeededToFill) {
 }
 
 void Renderer::reSize(float WINDOW_WIDTH, float WINDOW_HEIGHT) {
-    if (bufferOutput.size() < (WINDOW_HEIGHT / TextRenderer::characterHeight) + 1) {
-        float lastHeight;
-        if (bufferOutput.size() > 0) {
-           lastHeight = bufferOutput[bufferOutput.size() -1].y;
-        }
+    //TODO DON'T JUST REGENERATE THE BUFFER
+    if (bufferOutput.size() != (WINDOW_HEIGHT / TextRenderer::characterHeight) + 1) {
+        bufferOutput.clear();
         for (int i = bufferOutput.size() * TextRenderer::characterHeight; i < WINDOW_HEIGHT + TextRenderer::characterHeight; i+=TextRenderer::characterHeight) {
-            bufferOutput.push_back(Row(WINDOW_WIDTH, i + lastHeight, Renderer::generateNewSymbols(WINDOW_WIDTH)));
+            bufferOutput.push_back(Row(WINDOW_WIDTH, i, Renderer::generateNewSymbols(WINDOW_WIDTH)));
         }
     }
 

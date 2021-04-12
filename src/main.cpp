@@ -6,23 +6,29 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <renderer.h>
-#include <chrono>
 #include <unistd.h>
 #include <cstring>
+#include <glm/glm.hpp>
 
+//DEFAULT VALUES
 float WINDOW_WIDTH = 1920;
 float WINDOW_HEIGHT = 1080;
 
 double frameRate = 1000 / 60;
 bool binary = false;
-float changeInYAxis = 0.01;
+float changeInYAxis = 0.1;
+glm::vec3 color = glm::vec3(0, 1, 0); //GREEN
 
+
+
+//MAIN DEFINITION
 int main(int argc, char *argv[]) {
 
     for (int i = 0; i < argc; i++) {
         if (argv[i] == NULL) {
             break;
         }
+
 
         if (strcmp(argv[i], "-binary") == 0 || strcmp(argv[i], "-b") == 0) {
             binary = true;
@@ -31,6 +37,11 @@ int main(int argc, char *argv[]) {
         if (strcmp(argv[i], "-change") == 0 || strcmp(argv[i], "-c") == 0) {
             i++;
             changeInYAxis = std::stof(argv[i]);
+        }
+
+        if (strcmp(argv[i], "-color") == 0) {
+            color = glm::vec3(std::stof(argv[i+1]), std::stof(argv[i+2]), std::stof(argv[i+3]));
+            i+=3;
         }
     }
 
@@ -59,7 +70,7 @@ int main(int argc, char *argv[]) {
 
     std::cout << glGetString(GL_VERSION) << std::endl;
 
-    Renderer::setUp(WINDOW_WIDTH, WINDOW_HEIGHT, binary, changeInYAxis);
+    Renderer::setUp(WINDOW_WIDTH, WINDOW_HEIGHT, binary, changeInYAxis, color);
 
     double before;
     double deltaT;
