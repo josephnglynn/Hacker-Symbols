@@ -3,18 +3,29 @@ project(Hacker_Symbols)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Hacker_Symbols main.cpp)
+add_executable(${PROJECT_NAME} main.cpp)
 
-include(FindFreetype)
-include_directories(${FREETYPE_INCLUDE_DIRS})
+add_library(SHADER_UTILS shaders/shaderUtils.cpp)
+include_directories(shaders)
 
+configure_file(shaders/shader.frag ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file(shaders/shader.vert ${CMAKE_BINARY_DIR} COPYONLY)
+
+find_package(freetype CONFIG REQUIRED)
 find_package(GLEW REQUIRED)
-include_directories(${GLEW_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} ${GLEW_LIBRARIES})
-
-find_package(glfw3 3.3 REQUIRED)
-target_link_libraries(${PROJECT_NAME} glfw)
-
+find_package(glfw3 CONFIG REQUIRED)
+find_package(glm CONFIG REQUIRED)
 find_package(OpenGL REQUIRED)
-target_link_libraries(${PROJECT_NAME} OpenGL::GL)
+
+target_link_libraries(${PROJECT_NAME}
+        PRIVATE
+        OpenGL::GL
+        freetype
+        GLEW::GLEW
+        glm::glm
+        glfw
+        PUBLIC
+        SHADER_UTILS
+        )
+
 
