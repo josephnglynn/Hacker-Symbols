@@ -22,8 +22,8 @@ public:
 
 class Renderer {
 public:
-    //void Draw(float WINDOW_WIDTH, float WINDOW_HEIGHT, bool Binary):
-    static void setUp(float, float, bool);
+    //void Draw(float WINDOW_WIDTH, float WINDOW_HEIGHT, bool Binary, float changeInYAxis):
+    static void setUp(float, float, bool, float);
 
     //void Draw(float WINDOW_WIDTH, float WINDOW_HEIGHT, double deltaT):
     static void draw(float, float, double);
@@ -36,7 +36,7 @@ private:
     static std::string generateNewSymbols(unsigned int);
     static bool binary;
     static std::vector<Row> bufferOutput;
-
+    static float changeInYAxis;
 };
 
 

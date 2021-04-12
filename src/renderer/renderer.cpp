@@ -8,20 +8,25 @@
 
 bool Renderer::binary;
 std::vector<Row> Renderer::bufferOutput;
+float Renderer::changeInYAxis;
 
 void Renderer::draw(float WINDOW_WIDTH, float WINDOW_HEIGHT, double deltaT) {
     for (unsigned int i = 0; i < bufferOutput.size(); i++) {
-        bufferOutput[i].y += 0.01;
-
+        bufferOutput[i].y += Renderer::changeInYAxis * deltaT;
+        if (bufferOutput[i].y > WINDOW_HEIGHT) {
+            bufferOutput[i].y = 0 - (float)TextRenderer::characterHeight;
+            bufferOutput[i].data = generateNewSymbols(WINDOW_WIDTH);
+        }
         TextRenderer::RenderRow((*TextRenderer::textShader), bufferOutput[i].data, 0, bufferOutput[i].y, 1, glm::vec3(1, 1, 1));
     }
 }
 
 
 
-void Renderer::setUp(float WINDOW_WIDTH, float WINDOW_HEIGHT, bool BINARY) {
+void Renderer::setUp(float WINDOW_WIDTH, float WINDOW_HEIGHT, bool BINARY, float ChangeInYAxis) {
     TextRenderer::setUpTextRenderer(WINDOW_WIDTH, WINDOW_HEIGHT);
     binary = BINARY;
+    changeInYAxis = ChangeInYAxis;
 }
 
 std::string Renderer::generateNewSymbols(unsigned int widthNeededToFill) {
@@ -46,12 +51,12 @@ std::string Renderer::generateNewSymbols(unsigned int widthNeededToFill) {
 }
 
 void Renderer::reSize(float WINDOW_WIDTH, float WINDOW_HEIGHT) {
-    if (bufferOutput.size() < WINDOW_HEIGHT / TextRenderer::characterHeight) {
+    if (bufferOutput.size() < (WINDOW_HEIGHT / TextRenderer::characterHeight) + 1) {
         float lastHeight;
         if (bufferOutput.size() > 0) {
            lastHeight = bufferOutput[bufferOutput.size() -1].y;
         }
-        for (int i = bufferOutput.size() * TextRenderer::characterHeight; i < WINDOW_HEIGHT; i+=TextRenderer::characterHeight) {
+        for (int i = bufferOutput.size() * TextRenderer::characterHeight; i < WINDOW_HEIGHT + TextRenderer::characterHeight; i+=TextRenderer::characterHeight) {
             bufferOutput.push_back(Row(WINDOW_WIDTH, i + lastHeight, Renderer::generateNewSymbols(WINDOW_WIDTH)));
         }
     }

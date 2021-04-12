@@ -15,6 +15,7 @@ float WINDOW_HEIGHT = 1080;
 
 double frameRate = 1000 / 60;
 bool binary = false;
+float changeInYAxis = 0.01;
 
 int main(int argc, char *argv[]) {
 
@@ -25,6 +26,11 @@ int main(int argc, char *argv[]) {
 
         if (strcmp(argv[i], "-binary") == 0 || strcmp(argv[i], "-b") == 0) {
             binary = true;
+        }
+
+        if (strcmp(argv[i], "-change") == 0 || strcmp(argv[i], "-c") == 0) {
+            i++;
+            changeInYAxis = std::stof(argv[i]);
         }
     }
 
@@ -53,7 +59,7 @@ int main(int argc, char *argv[]) {
 
     std::cout << glGetString(GL_VERSION) << std::endl;
 
-    Renderer::setUp(WINDOW_WIDTH, WINDOW_HEIGHT, binary);
+    Renderer::setUp(WINDOW_WIDTH, WINDOW_HEIGHT, binary, changeInYAxis);
 
     double before;
     double deltaT;
