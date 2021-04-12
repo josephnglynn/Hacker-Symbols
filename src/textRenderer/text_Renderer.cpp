@@ -57,7 +57,7 @@ void TextRenderer::setUpTextRenderer(float WINDOW_WIDTH, float WINDOW_HEIGHT) {
 
     if (FT_Init_FreeType(&ft_library)) {
         std::cerr << "ERROR FREETYPE DIDN'T INIT" << std::endl;
-        std::exit(-1);;
+        std::exit(-1);
         
     }
 
@@ -65,14 +65,14 @@ void TextRenderer::setUpTextRenderer(float WINDOW_WIDTH, float WINDOW_HEIGHT) {
     FT_Face font;
     if (FT_New_Face(ft_library, FONT_PATH, 0, &font)) {
         std::cerr << "ERROR FAILED TO LOAD FONT" << std::endl;
-        std::exit(-1);;
+        std::exit(-1);
     }
 
     FT_Set_Pixel_Sizes(font, 0, 48);
 
     if (FT_Load_Char(font, 'X', FT_LOAD_RENDER)) {
         std::cerr << "ERROR CAN'T LOAD CHAR" << std::endl;
-        std::exit(-1);;
+        std::exit(-1);
     }
 
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -80,7 +80,7 @@ void TextRenderer::setUpTextRenderer(float WINDOW_WIDTH, float WINDOW_HEIGHT) {
     for (unsigned char c = 0; c < 128; c++) {
         if (FT_Load_Char(font, c, FT_LOAD_RENDER)) {
             std::cerr << "ERROR CAN'T LOAD CHAR: " << c << std::endl;
-            std::exit(-1);;
+            std::exit(-1);
         }
 
         unsigned int characterTexture;
