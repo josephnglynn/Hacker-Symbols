@@ -15,8 +15,6 @@
 #include <GL/glew.h>
 
 
-#define FONT_PATH "Roboto-Regular.ttf"
-
 
 struct Character {
     unsigned int TextureID;  // ID handle of the glyph texture
@@ -27,16 +25,19 @@ struct Character {
 
 class TextRenderer {
 public:
-    static unsigned int VAO, VBO;
     static unsigned int characterHeight;
     static std::map<char, Character> Characters;
     static Shader *textShader;
 
-    //void setUpTextRenderer(float WINDOW_WIDTH, float WINDOW_HEIGHT, unsigned int fontHeight);
-    static void setUpTextRenderer(float, float, unsigned int);
+    //void setUpTextRenderer(float WINDOW_WIDTH, float WINDOW_HEIGHT, unsigned int fontHeight, std::string font_path);
+    static void setUpTextRenderer(float, float, unsigned int, char *);
 
     //void RenderRow(Shader theShader, std::string theStringOfCharacters, float theXPosition, float theYPosition, float scale, glm::vec3 theColor);
     static void RenderRow(Shader, std::string, float, float, float, glm::vec3);
+
+private:
+    static unsigned int VAO, VBO;
+    static char * FONT_PATH;
 };
 
 
