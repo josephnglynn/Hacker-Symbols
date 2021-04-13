@@ -17,7 +17,6 @@ find_package(OpenGL REQUIRED)
 find_package(freetype CONFIG REQUIRED)
 
 
-
 add_library(SHADER_UTILS STATIC src/renderer/textRenderer/shaders/shaderUtils.cpp src/renderer/textRenderer/shaders/shaderUtils.h)
 target_include_directories(SHADER_UTILS PUBLIC src/renderer/textRenderer/shaders)
 
@@ -29,11 +28,12 @@ add_library(RENDERER STATIC src/renderer/renderer.cpp src/renderer/renderer.h)
 target_include_directories(RENDERER PUBLIC src/renderer)
 target_link_libraries(RENDERER PRIVATE TEXT_RENDERER)
 
-target_link_libraries(${PROJECT_NAME}
+target_link_libraries(
+        ${PROJECT_NAME}
         PRIVATE
         OpenGL::GL
         GLEW::GLEW
         glm::glm
         glfw
         RENDERER
-        )
+)

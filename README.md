@@ -1,5 +1,5 @@
 # hacker symbols
- A simple opengl application with renders random ascii symbols to the window in a variety of colours, speeds, fonts and spread.
+A simple opengl application with renders random ascii symbols to the window in a variety of colours, speeds, fonts and spread.
 
 The usage function below shows how to change run time values in the program.
 ```c++
