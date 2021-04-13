@@ -88,7 +88,6 @@ void Renderer::reSize(float WINDOW_WIDTH, float WINDOW_HEIGHT) {
         bufferOutput.clear();
         for (int i = bufferOutput.size() * TextRenderer::characterHeight;
              i < WINDOW_HEIGHT + TextRenderer::characterHeight; i += TextRenderer::characterHeight) {
-            std::cout << i << std::endl;;
             bufferOutput.push_back(Row(WINDOW_WIDTH, i, Renderer::generateNewSymbols(WINDOW_WIDTH)));
         }
     }
