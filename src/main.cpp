@@ -18,6 +18,21 @@ double frameRate = 1000 / 60;
 bool binary = false;
 float changeInYAxis = 0.1;
 glm::vec3 color = glm::vec3(0, 1, 0); //GREEN
+glm::vec3 bgColor = glm::vec3 (0, 0, 0);
+float customSplit = 1;
+
+
+void usage() {
+    printf("    -color : sets textColor based on three floats for rgb color following the flag. 0 <= values <= 1\n"
+           "    -colorRGB : sets textColor based on three floats as rgb colors : 0 <= values <= 255\n"
+           "    -bg : sets background color based on three floats for rgb color following the flag. 0 <= values <= 1\n"
+           "    -bgRGB : sets background color based on three floats for rgb color following the flag. 0 <= values <= 255\n"
+           "    -binary / -b : DISPLAYS ONLY BINARY CHARACTERS (0, 1)\n"
+            "    -change / -c : ALLOW YOU TO DEFINE THE SPEED OF CHARACTERS\n"
+            "    -custom-split / -cs : ALLOWS YOU TO DEFINE SPREAD OF CHARACTERS - HIGHER = SPARSER\n"
+            "    -help / help : DISPLAYS HELP\n"
+    );
+}
 
 
 
@@ -40,8 +55,34 @@ int main(int argc, char *argv[]) {
         }
 
         if (strcmp(argv[i], "-color") == 0) {
-            color = glm::vec3(std::stof(argv[i+1]), std::stof(argv[i+2]), std::stof(argv[i+3]));
-            i+=3;
+            color = glm::vec3(std::stof(argv[i + 1]), std::stof(argv[i + 2]), std::stof(argv[i + 3]));
+            i += 3;
+        }
+
+        if (strcmp(argv[i], "-colorRGB") == 0) {
+            color = glm::vec3(std::stof(argv[i + 1]) / 255, std::stof(argv[i + 2]) / 255, std::stof(argv[i + 3]) / 255);
+            i += 3;
+        }
+
+        if (strcmp(argv[i], "-bg") == 0) {
+            bgColor = glm::vec3(std::stof(argv[i + 1]), std::stof(argv[i + 2]), std::stof(argv[i + 3]));
+            i += 3;
+        }
+
+        if (strcmp(argv[i], "-bgRGB") == 0) {
+            bgColor = glm::vec3(std::stof(argv[i + 1]) / 255, std::stof(argv[i + 2]) / 255, std::stof(argv[i + 3]) / 255);
+            i += 3;
+        }
+
+        if (strcmp(argv[i], "-custom-split") == 0 || strcmp(argv[i], "-cs") == 0) {
+            customSplit = std::stof(argv[i + 1]);
+            i++;
+        }
+
+
+        if (strcmp(argv[i], "-help") == 0 || strcmp(argv[i], "help") == 0 || strcmp(argv[i], "-h") == 0) {
+            usage();
+            return 0;
         }
     }
 
@@ -70,15 +111,16 @@ int main(int argc, char *argv[]) {
 
     std::cout << glGetString(GL_VERSION) << std::endl;
 
-    Renderer::setUp(WINDOW_WIDTH, WINDOW_HEIGHT, binary, changeInYAxis, color);
+    Renderer::setUp(WINDOW_WIDTH, WINDOW_HEIGHT, binary, changeInYAxis, color, customSplit);
 
     double before;
     double deltaT;
 
     while (!glfwWindowShouldClose(window)) {
         before = glfwGetTime() * 1000;
-        glClear(GL_COLOR_BUFFER_BIT);
 
+        glClearColor(bgColor.x, bgColor.y, bgColor.z, 1);
+        glClear(GL_COLOR_BUFFER_BIT);
 
         Renderer::draw(WINDOW_WIDTH, WINDOW_HEIGHT, deltaT);
 
