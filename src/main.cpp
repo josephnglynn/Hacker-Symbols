@@ -21,7 +21,12 @@ glm::vec3 color = glm::vec3(0, 1, 0); //GREEN
 glm::vec3 bgColor = glm::vec3 (0, 0, 0);
 float customSplit = 1;
 unsigned int FONT_HEIGHT = 40;
-char * FONT_PATH =  "Roboto-Regular.ttf";
+
+#ifdef __linux__
+const char * FONT_PATH =  "/usr/share/hackerSymbols/Roboto-Regular.ttf";
+#else
+const char * FONT_PATH =  'Roboto-Regular.ttf';
+#endif
 
 
 void usage() {
@@ -125,7 +130,7 @@ int main(int argc, char *argv[]) {
 
     std::cout << glGetString(GL_VERSION) << std::endl;
 
-    Renderer::setUp(WINDOW_WIDTH, WINDOW_HEIGHT, binary, changeInYAxis, color, customSplit, FONT_HEIGHT, FONT_PATH);
+    Renderer::setUp(WINDOW_WIDTH, WINDOW_HEIGHT, binary, changeInYAxis, color, customSplit, FONT_HEIGHT, const_cast<char *>(FONT_PATH));
 
     double before;
     double deltaT;
