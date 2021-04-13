@@ -20,6 +20,7 @@ float changeInYAxis = 0.1;
 glm::vec3 color = glm::vec3(0, 1, 0); //GREEN
 glm::vec3 bgColor = glm::vec3 (0, 0, 0);
 float customSplit = 1;
+unsigned int FONT_HEIGHT;
 
 
 void usage() {
@@ -28,6 +29,7 @@ void usage() {
            "    -bg : sets background color based on three floats for rgb color following the flag. 0 <= values <= 1\n"
            "    -bgRGB : sets background color based on three floats for rgb color following the flag. 0 <= values <= 255\n"
            "    -binary / -b : DISPLAYS ONLY BINARY CHARACTERS (0, 1)\n"
+           "    -fontSize / -fs : Sets the height of the font\n"
             "    -change / -c : ALLOW YOU TO DEFINE THE SPEED OF CHARACTERS\n"
             "    -custom-split / -cs : ALLOWS YOU TO DEFINE SPREAD OF CHARACTERS - HIGHER = SPARSER\n"
             "    -help / help : DISPLAYS HELP\n"
@@ -79,6 +81,11 @@ int main(int argc, char *argv[]) {
             i++;
         }
 
+        if (strcmp(argv[i], "-fontSize") == 0 || strcmp(argv[i], "-fs") == 0) {
+            FONT_HEIGHT = std::stoi(argv[i + 1]);
+            i++;
+        }
+
 
         if (strcmp(argv[i], "-help") == 0 || strcmp(argv[i], "help") == 0 || strcmp(argv[i], "-h") == 0) {
             usage();
@@ -111,7 +118,7 @@ int main(int argc, char *argv[]) {
 
     std::cout << glGetString(GL_VERSION) << std::endl;
 
-    Renderer::setUp(WINDOW_WIDTH, WINDOW_HEIGHT, binary, changeInYAxis, color, customSplit);
+    Renderer::setUp(WINDOW_WIDTH, WINDOW_HEIGHT, binary, changeInYAxis, color, customSplit, FONT_HEIGHT);
 
     double before;
     double deltaT;

@@ -23,8 +23,8 @@ public:
 
 class Renderer {
 public:
-    //void Draw(float WINDOW_WIDTH, float WINDOW_HEIGHT, bool Binary, float changeInYAxis, unsigned int custom split):
-    static void setUp(float, float, bool, float, glm::vec3, float);
+    //void Draw(float WINDOW_WIDTH, float WINDOW_HEIGHT, bool Binary, float changeInYAxis, unsigned int custom split, unsigned int FONT_HEIGHT):
+    static void setUp(float, float, bool, float, glm::vec3, float, unsigned int);
 
     //void Draw(float WINDOW_WIDTH, float WINDOW_HEIGHT, double deltaT):
     static void draw(float, float, double);

@@ -32,8 +32,8 @@ public:
     static std::map<char, Character> Characters;
     static Shader *textShader;
 
-    //void setUpTextRenderer(float WINDOW_WIDTH, float WINDOW_HEIGHT);
-    static void setUpTextRenderer(float, float);
+    //void setUpTextRenderer(float WINDOW_WIDTH, float WINDOW_HEIGHT, unsigned int fontHeight);
+    static void setUpTextRenderer(float, float, unsigned int);
 
     //void RenderRow(Shader theShader, std::string theStringOfCharacters, float theXPosition, float theYPosition, float scale, glm::vec3 theColor);
     static void RenderRow(Shader, std::string, float, float, float, glm::vec3);

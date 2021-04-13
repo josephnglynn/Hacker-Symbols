@@ -36,8 +36,8 @@ void Renderer::draw(float WINDOW_WIDTH, float WINDOW_HEIGHT, double deltaT) {
 
 
 void Renderer::setUp(float WINDOW_WIDTH, float WINDOW_HEIGHT, bool BINARY, float ChangeInYAxis, glm::vec3 COLOR,
-                     float CUSTOM_SPLIT) {
-    TextRenderer::setUpTextRenderer(WINDOW_WIDTH, WINDOW_HEIGHT);
+                     float CUSTOM_SPLIT, unsigned int FONT_HEIGHT) {
+    TextRenderer::setUpTextRenderer(WINDOW_WIDTH, WINDOW_HEIGHT, FONT_HEIGHT);
     binary = BINARY;
     changeInYAxis = ChangeInYAxis;
     color = COLOR;
