@@ -20,7 +20,6 @@ void usage() {
             "        -red\n"
             "        -yellow\n"
 
-
             "    -binary / -b : DISPLAYS ONLY BINARY CHARACTERS (0, 1)\n"
             "    -frame-time / -ft : ALLOWS YOU TO DEFINE SLEEP INTERVAL BETWEEN RENDERS\n"
             "    -custom-split / -cs : ALLOWS YOU TO DEFINE SPREAD OF CHARACTERS - HIGHER = SPARSER\n"
