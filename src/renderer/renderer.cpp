@@ -16,7 +16,7 @@ void Renderer::draw(float WINDOW_WIDTH, float WINDOW_HEIGHT, double deltaT) {
     bool gotLowest = false;
     float lowest = 0;
     for (unsigned int i = 0; i < bufferOutput.size(); i++) {
-        bufferOutput[i].y += Renderer::changeInYAxis * deltaT;
+        bufferOutput[i].y += changeInYAxis * deltaT;
         if (bufferOutput[i].y > WINDOW_HEIGHT) {
             if (!gotLowest) {
                 gotLowest = true;
