@@ -4,10 +4,13 @@
 
 #include "text_Renderer.h"
 
+#include <utility>
+
 unsigned int TextRenderer::VAO, TextRenderer::VBO;
 std::map<char, Character> TextRenderer::Characters;
 Shader* TextRenderer::textShader;
 unsigned int TextRenderer::characterHeight = 48;
+char * TextRenderer::FONT_PATH;
 
 
 
@@ -52,7 +55,10 @@ void TextRenderer::RenderRow(Shader shader, std::string row, float x, float y, f
 }
 
 
-void TextRenderer::setUpTextRenderer(float WINDOW_WIDTH, float WINDOW_HEIGHT) {
+void TextRenderer::setUpTextRenderer(float WINDOW_WIDTH, float WINDOW_HEIGHT, unsigned int FONT_HEIGHT, char * font_path) {
+    TextRenderer::FONT_PATH = font_path;
+    TextRenderer::characterHeight = FONT_HEIGHT;
+
     glEnable(GL_CULL_FACE);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -67,7 +73,7 @@ void TextRenderer::setUpTextRenderer(float WINDOW_WIDTH, float WINDOW_HEIGHT) {
 
 
     FT_Face font;
-    if (FT_New_Face(ft_library, FONT_PATH, 0, &font)) {
+    if (FT_New_Face(ft_library, TextRenderer::FONT_PATH, 0, &font)) {
         std::cerr << "ERROR FAILED TO LOAD FONT" << std::endl;
         std::exit(-1);
     }

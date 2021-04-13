@@ -16,7 +16,7 @@ void Renderer::draw(float WINDOW_WIDTH, float WINDOW_HEIGHT, double deltaT) {
     bool gotLowest = false;
     float lowest = 0;
     for (unsigned int i = 0; i < bufferOutput.size(); i++) {
-        bufferOutput[i].y += Renderer::changeInYAxis * deltaT;
+        bufferOutput[i].y += changeInYAxis * deltaT;
         if (bufferOutput[i].y > WINDOW_HEIGHT) {
             if (!gotLowest) {
                 gotLowest = true;
@@ -36,8 +36,8 @@ void Renderer::draw(float WINDOW_WIDTH, float WINDOW_HEIGHT, double deltaT) {
 
 
 void Renderer::setUp(float WINDOW_WIDTH, float WINDOW_HEIGHT, bool BINARY, float ChangeInYAxis, glm::vec3 COLOR,
-                     float CUSTOM_SPLIT) {
-    TextRenderer::setUpTextRenderer(WINDOW_WIDTH, WINDOW_HEIGHT);
+                     float CUSTOM_SPLIT, unsigned int FONT_HEIGHT, char * FONT_PATH) {
+    TextRenderer::setUpTextRenderer(WINDOW_WIDTH, WINDOW_HEIGHT, FONT_HEIGHT, FONT_PATH);
     binary = BINARY;
     changeInYAxis = ChangeInYAxis;
     color = COLOR;
@@ -88,7 +88,6 @@ void Renderer::reSize(float WINDOW_WIDTH, float WINDOW_HEIGHT) {
         bufferOutput.clear();
         for (int i = bufferOutput.size() * TextRenderer::characterHeight;
              i < WINDOW_HEIGHT + TextRenderer::characterHeight; i += TextRenderer::characterHeight) {
-            std::cout << i << std::endl;;
             bufferOutput.push_back(Row(WINDOW_WIDTH, i, Renderer::generateNewSymbols(WINDOW_WIDTH)));
         }
     }
