@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.17)
-project(Hacker_Symbols)
+project(hackerSymbols)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -37,3 +37,21 @@ target_link_libraries(
         glfw
         RENDERER
 )
+
+if(UNIX AND NOT APPLE AND TARGET hackerSymbols)
+
+install(
+        FILES
+        "src/renderer/textRenderer/shaders/shader.frag"
+        "src/renderer/textRenderer/shaders/shader.vert"
+        "src/renderer/textRenderer/Roboto-Regular.ttf"
+        DESTINATION
+        "/usr/share/hackerSymbols"
+)
+
+install(
+        TARGETS  hackerSymbols
+        RUNTIME DESTINATION  "/usr/bin"
+)
+
+endif()

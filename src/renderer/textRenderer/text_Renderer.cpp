@@ -13,6 +13,13 @@ unsigned int TextRenderer::characterHeight = 48;
 char * TextRenderer::FONT_PATH;
 
 
+#ifdef __linux__
+#define SHADER_FRAG_PATH "/usr/share/hackerSymbols/shader.frag"
+#define SHADER_VERT_PATH "/usr/share/hackerSymbols/shader.vert"
+#else
+#define SHADER_FRAG_PATH "shader.frag"
+#define SHADER_VERT_PATH "shader.vert"
+#endif
 
 
 void TextRenderer::RenderRow(Shader shader, std::string row, float x, float y, float scale, glm::vec3 color) {
@@ -132,7 +139,8 @@ void TextRenderer::setUpTextRenderer(float WINDOW_WIDTH, float WINDOW_HEIGHT, un
     glBindVertexArray(0);
 
 
-    textShader = new Shader("shader.vert", "shader.frag");
+
+    textShader = new Shader(SHADER_VERT_PATH, SHADER_FRAG_PATH);
     glm::mat4 projection = glm::ortho(0.0f, WINDOW_WIDTH, 0.0f, WINDOW_HEIGHT);
     (*textShader).useShader();
     glUniformMatrix4fv(glGetUniformLocation((*textShader).ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
