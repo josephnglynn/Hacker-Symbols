@@ -21,11 +21,6 @@ void usage() {
 }
 ```
 
-
-
-
-
-
 ## Previous Version
 The old terminal based version:
 > Simple terminal application which outputs random ascii symbols to the terminal in a varity of colours and different speeds
