@@ -30,7 +30,7 @@ void TextRenderer::RenderRow(Shader shader, std::string row, float x, float y, f
     glBindVertexArray(VAO);
 
     std::string::const_iterator c;
-    for (c = row.begin(); c != row.end(); c++) {
+    for (c = row.begin(); c != row.end(); ++c) {
 
         if (*c == ' ') {
             x += 5;
@@ -94,7 +94,7 @@ void TextRenderer::setUpTextRenderer(float WINDOW_WIDTH, float WINDOW_HEIGHT, un
 
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-    for (unsigned char c = 0; c < 128; c++) {
+    for (unsigned char c = 0; c < 128; ++c) {
         if (FT_Load_Char(font, c, FT_LOAD_RENDER)) {
             std::cerr << "ERROR CAN'T LOAD CHAR: " << c << std::endl;
             std::exit(-1);
