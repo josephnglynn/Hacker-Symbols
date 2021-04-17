@@ -11,7 +11,6 @@
 #include <vector>
 #include <glm/glm.hpp>
 
-
 class Row {
 public:
     unsigned int width;

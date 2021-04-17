@@ -32,6 +32,11 @@ void TextRenderer::RenderRow(Shader shader, std::string row, float x, float y, f
     std::string::const_iterator c;
     for (c = row.begin(); c != row.end(); c++) {
 
+        if (*c == ' ') {
+            x += 5;
+            continue;
+        }
+
         Character character = Characters[*c];
 
         float xPos = x + (float) character.Bearing.x * scale;

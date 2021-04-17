@@ -32,6 +32,7 @@ void Renderer::draw(float WINDOW_WIDTH, float WINDOW_HEIGHT, double deltaT) {
         }
         TextRenderer::RenderRow((*TextRenderer::textShader), bufferOutput[i].data, 0, bufferOutput[i].y, 1, color);
     }
+
 }
 
 
