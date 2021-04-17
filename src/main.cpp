@@ -130,11 +130,11 @@ int main(int argc, char *argv[]) {
 
     Renderer::setUp(WINDOW_WIDTH, WINDOW_HEIGHT, binary, changeInYAxis, color, customSplit, FONT_HEIGHT, const_cast<char *>(FONT_PATH));
 
-    double before;
+    
     double deltaT;
 
     while (!glfwWindowShouldClose(window)) {
-        before = glfwGetTime() * 1000;
+        double before = glfwGetTime() * 1000;
 
         glClearColor(bgColor.x, bgColor.y, bgColor.z, 1);
         glClear(GL_COLOR_BUFFER_BIT);
