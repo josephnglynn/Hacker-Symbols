@@ -1,4 +1,6 @@
 # hacker symbols
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/67299f029f3d453a81cea43f706019ff)](https://www.codacy.com/gh/josephnglynn/Hacker-Symbols/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=josephnglynn/Hacker-Symbols&amp;utm_campaign=Badge_Grade)
+
 A simple opengl application with renders random ascii symbols to the window in a variety of colours, speeds, fonts and spread.
 
 The usage function below shows how to change run time values in the program.
