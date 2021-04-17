@@ -5,8 +5,6 @@
 #include "renderer.h"
 #include <text_Renderer.h>
 
-#include <utility>
-
 
 bool Renderer::binary;
 std::vector<Row> Renderer::bufferOutput;
