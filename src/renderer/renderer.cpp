@@ -5,6 +5,8 @@
 #include "renderer.h"
 #include <text_Renderer.h>
 
+#include <utility>
+
 
 bool Renderer::binary;
 std::vector<Row> Renderer::bufferOutput;
@@ -100,8 +102,7 @@ void Renderer::reSize(float WINDOW_WIDTH, float WINDOW_HEIGHT) {
     }
 }
 
-Row::Row(const unsigned int _width, const float yPos, const std::string& _data) {
+Row::Row(const unsigned int _width, const float yPos, std::string  _data) : data(std::move(_data)) {
     width = _width;
-    data = _data;
     y = yPos;
 }
