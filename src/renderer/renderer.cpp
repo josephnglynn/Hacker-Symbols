@@ -15,12 +15,12 @@ float Renderer::customSplit;
 void Renderer::draw(float WINDOW_WIDTH, float WINDOW_HEIGHT, double deltaT) {
     bool gotLowest = false;
     float lowest = 0;
-    for (unsigned int i = 0; i < bufferOutput.size(); i++) {
+    for (unsigned int i = 0; i < bufferOutput.size(); ++i) {
         bufferOutput[i].y += changeInYAxis * deltaT;
         if (bufferOutput[i].y > WINDOW_HEIGHT) {
             if (!gotLowest) {
                 gotLowest = true;
-                for (unsigned int i = 0; i < bufferOutput.size(); i++) {
+                for (unsigned int i = 0; i < bufferOutput.size(); ++i) {
                     if (bufferOutput[i].y < lowest) {
                         lowest = bufferOutput[i].y;
                     }
@@ -102,6 +102,6 @@ void Renderer::reSize(float WINDOW_WIDTH, float WINDOW_HEIGHT) {
 
 Row::Row(unsigned int _width, float yPos, std::string _data) {
     width = _width;
-    data = std::move(_data);
+    data = _data;
     y = yPos;
 }
