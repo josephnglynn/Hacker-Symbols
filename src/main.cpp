@@ -17,7 +17,7 @@ bool binary = false;
 float changeInYAxis = 0.1;
 glm::vec3 color = glm::vec3(0, 1, 0); //GREEN
 glm::vec3 bgColor = glm::vec3 (0, 0, 0);
-float customSplit = 2;
+float customSplit = 1;
 unsigned int FONT_HEIGHT = 20;
 
 #ifdef __linux__
