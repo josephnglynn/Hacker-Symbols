@@ -100,7 +100,7 @@ void Renderer::reSize(float WINDOW_WIDTH, float WINDOW_HEIGHT) {
     }
 }
 
-Row::Row(unsigned int _width, float yPos, std::string _data) {
+Row::Row(const unsigned int _width, const float yPos, const std::string& _data) {
     width = _width;
     data = _data;
     y = yPos;

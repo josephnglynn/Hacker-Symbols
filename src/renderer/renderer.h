@@ -16,7 +16,7 @@ public:
     unsigned int width;
     std::string data;
     float y;
-    explicit Row(unsigned int, float, std::string);
+    explicit Row(unsigned int, float, const std::string&);
 };
 
 
