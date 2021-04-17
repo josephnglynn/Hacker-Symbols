@@ -6,7 +6,6 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <renderer.h>
-#include <unistd.h>
 #include <cstring>
 #include <glm/glm.hpp>
 
@@ -14,13 +13,12 @@
 float WINDOW_WIDTH = 1920;
 float WINDOW_HEIGHT = 1080;
 
-double frameRate = 1000 / 60;
 bool binary = false;
 float changeInYAxis = 0.1;
 glm::vec3 color = glm::vec3(0, 1, 0); //GREEN
 glm::vec3 bgColor = glm::vec3 (0, 0, 0);
 float customSplit = 1;
-unsigned int FONT_HEIGHT = 40;
+unsigned int FONT_HEIGHT = 20;
 
 #ifdef __linux__
 const char * FONT_PATH =  "/usr/share/hackerSymbols/Roboto-Regular.ttf";
@@ -53,6 +51,11 @@ int main(int argc, char *argv[]) {
             break;
         }
 
+        if (strcmp(argv[i], "-custom-split") == 0 || strcmp(argv[i], "-cs") == 0) {
+            customSplit = std::stof(argv[i + 1]);
+            i++;
+        }
+
 
         if (strcmp(argv[i], "-binary") == 0 || strcmp(argv[i], "-b") == 0) {
             binary = true;
@@ -81,11 +84,6 @@ int main(int argc, char *argv[]) {
         if (strcmp(argv[i], "-bgRGB") == 0) {
             bgColor = glm::vec3(std::stof(argv[i + 1]) / 255, std::stof(argv[i + 2]) / 255, std::stof(argv[i + 3]) / 255);
             i += 3;
-        }
-
-        if (strcmp(argv[i], "-custom-split") == 0 || strcmp(argv[i], "-cs") == 0) {
-            customSplit = std::stof(argv[i + 1]);
-            i++;
         }
 
         if (strcmp(argv[i], "-fontSize") == 0 || strcmp(argv[i], "-fs") == 0) {
@@ -132,11 +130,11 @@ int main(int argc, char *argv[]) {
 
     Renderer::setUp(WINDOW_WIDTH, WINDOW_HEIGHT, binary, changeInYAxis, color, customSplit, FONT_HEIGHT, const_cast<char *>(FONT_PATH));
 
-    double before;
+    
     double deltaT;
 
     while (!glfwWindowShouldClose(window)) {
-        before = glfwGetTime() * 1000;
+        double before = glfwGetTime() * 1000;
 
         glClearColor(bgColor.x, bgColor.y, bgColor.z, 1);
         glClear(GL_COLOR_BUFFER_BIT);
@@ -146,10 +144,7 @@ int main(int argc, char *argv[]) {
         glfwSwapBuffers(window);
         glfwPollEvents();
 
-        deltaT = glfwGetTime() * 1000 - before;
-        if (frameRate - deltaT > 0) {
-            usleep(frameRate - deltaT);
-        }
+        deltaT = (glfwGetTime() * 1000) - before;
     }
 
     glfwTerminate();

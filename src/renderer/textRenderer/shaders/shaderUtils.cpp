@@ -27,7 +27,7 @@ Shader::Shader(const char *vertexPath, const char *fragmentPath) {
 
         vertexShader = vertexShaderStream.str();
         fragmentShader = fragmentShaderStream.str();
-    } catch (std::ifstream::failure e) {
+    } catch (std::ifstream::failure &e) {
         std::cerr << "ERROR CAN'T READ SHADER" << std::endl;
     }
 
