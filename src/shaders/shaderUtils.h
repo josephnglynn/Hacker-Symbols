@@ -2,8 +2,8 @@
 // Created by joseph on 11/04/2021.
 //
 
-#ifndef HACKER_SYMBOLS_SHADERUTILS_H
-#define HACKER_SYMBOLS_SHADERUTILS_H
+#pragma once
+
 #include <GL/glew.h>
 #include <string>
 #include <fstream>
@@ -21,4 +21,3 @@ public:
 
 };
 
-#endif //HACKER_SYMBOLS_SHADERUTILS_H

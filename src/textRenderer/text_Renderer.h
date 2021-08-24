@@ -2,8 +2,7 @@
 // Created by joseph on 12/04/2021.
 //
 
-#ifndef HACKER_SYMBOLS_TEXT_RENDERER_H
-#define HACKER_SYMBOLS_TEXT_RENDERER_H
+#pragma once
 
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
@@ -11,8 +10,8 @@
 #include <string>
 #include <ft2build.h>
 #include FT_FREETYPE_H
-#include "shaders/shaderUtils.h"
 #include <GL/glew.h>
+#include "../shaders/shaderUtils.h"
 
 
 
@@ -41,4 +40,4 @@ private:
 };
 
 
-#endif //HACKER_SYMBOLS_TEXT_RENDERER_H
+

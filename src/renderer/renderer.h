@@ -2,8 +2,7 @@
 // Created by joseph on 12/04/2021.
 //
 
-#ifndef HACKER_SYMBOLS_RENDERER_H
-#define HACKER_SYMBOLS_RENDERER_H
+#pragma  once
 
 #include <vector>
 #include <string>
@@ -41,5 +40,3 @@ private:
     static float customSplit;
 };
 
-
-#endif //HACKER_SYMBOLS_RENDERER_H
